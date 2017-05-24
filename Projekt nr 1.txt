@@ -1,0 +1,95 @@
+#Demonstration that height of diffusion flame depends from velocity of outflow of combustible gas in nozzle and
+# diameter outflow nozzle
+
+import cantera as ct
+import numpy as np
+import matplotlib.pyplot as plt
+
+#L Distance L from nozzle cross-section of pipe
+#t Time to combine gas with the air
+
+#Do zadeklarowania:
+w=1 #Outflow velocity of the gas from nozzle= 2m/s
+D=8*0.001 #Average diameter of the nozzle = 8 mm
+Dm=0.16*0.0001*3600 #Molecular diffusion coefficient = 0,16cm^2/s
+
+#t=L/w
+
+#Equation which combining average square the route of the molecules x^2 with the route which was spend
+#x_kwadrat=2*Dm*t
+
+#Dla x=D/2
+
+#(D**2)/4=2*Dm*t 
+#(np.pi*D**2)/4=2*np.pi*Dm*t
+
+#Approximated volume of the mix area
+
+#V=np.pi*(D**2/4)*L
+#V=2*np.pi*Dm*t*L
+
+#Volume changes in time t
+#Vt = Volume yield of the gas
+
+#Vt= V/t
+#Vt=2*np.pi*Dm*L
+
+#Now we can calculate the height L:
+#ro= #Density of the gas
+#mt= #Mass yield of the gas
+
+#L=(mt*)/(ro*2*np.pi*Dm)
+
+#We know that t1=t2
+list1=[]
+list2=[]
+list3=[]
+list4=[]
+n=1
+#So we can determine: L
+while w<10:
+    L=(w*D**2)/(8*Dm) #Height
+    
+    t=L/w #Time
+    
+    V=2*np.pi*Dm*t*L #Volume of mix area
+    Vt=2*np.pi*Dm*L #Volume yield
+    list1.append(L)
+    list2.append(w)
+    list3.append(V)
+    list4.append(Vt)
+    print ("Przypadek nr" " " "n=%s" %n) 
+    print("L=%s" %L)
+    print("V=%s" %V)
+    print("Vt=%s" %Vt)
+    print(" ")
+    
+    n=n+1
+    w=w+0.05 #Calculation with change the velocity of the outflow
+    
+    
+    
+    
+plt.plot(list2,list1,'b--')
+plt.xlabel('Outflow velocity [m/s]')
+plt.ylabel('Height of the flame [m] ')
+plt.title('Dependance the height of the flame from outflow velocity')
+plt.grid(True)
+plt.savefig('wykkr.png', bbox_inches='tight')
+plt.show()
+
+plt.plot(list2,list3,'y--')
+plt.xlabel('Outflow velocity [m/s]')
+plt.ylabel('Volume of mix area ')
+plt.title('Dependance the volume of mix area from outflow velocity')
+plt.grid(True)
+plt.savefig('wykkr.png', bbox_inches='tight')
+plt.show()
+
+plt.plot(list2,list4,'g--')
+plt.xlabel('Outflow velocity [m/s]')
+plt.ylabel('Volume yield ')
+plt.title('Dependance the volume yield from outflow velocity')
+plt.grid(True)
+plt.savefig('wykkr.png', bbox_inches='tight')
+plt.show()
